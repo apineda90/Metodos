@@ -1,0 +1,31 @@
+//ELimina duplicados de archivo nimbus.cvs
+
+memory_percent<-nimbus$memory_percent
+rss<-nimbus$rss
+vms<-nimbus$vms
+bytes_sent<-nimbus$bytes_sent
+bytes_recv<-nimbus$bytes_recv
+packets_sent<-nimbus$packets_sent
+packets_recv<-nimbus$packets_recv
+errin<-nimbus$errin
+errout<-nimbus$errout
+dropout<-nimbus$dropout
+read_count<-nimbus$read_count
+write_count<-nimbus$write_count
+read_bytes<-nimbus$read_bytes
+write_bytes<-nimbus$write_bytes
+cpu_percent<-nimbus$cpu_percent
+num_fds<-nimbus$num_fds
+num_ctx_switchesVoluntary<-nimbus$num_ctx_switchesVoluntary
+num_ctx_switchesInvoluntary<-nimbus$num_ctx_switchesInvoluntary
+
+df <-data.frame(memory_percent,rss,vms,bytes_sent,bytes_recv,packets_sent,bytes_recv,packets_sent,packets_recv,errin,dropout,read_count,write_count,read_bytes,write_bytes,cpu_percent,num_fds,num_ctx_switchesVoluntary,num_ctx_switchesInvoluntary)
+library(sqldf)
+write.csv(sqldf('SELECT DISTINCT * FROM df'),file="nimbusSinRep") 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+write(x, file = "data",
+      ncolumns = if(is.character(x)) 1 else 5,
+      append = FALSE, sep = " ")

@@ -24,8 +24,33 @@ library(sqldf)
 write.csv(sqldf('SELECT DISTINCT * FROM df'),file="nimbusSinRep") 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ELimina duplicados de archivo zookeeper.cvs
+
+memory_percent<-zookeeper$memory_percent
+rss<-zookeeper$rss
+vms<-zookeeper$vms
+bytes_sent<-zookeeper$bytes_sent
+bytes_recv<-zookeeper$bytes_recv
+packets_sent<-zookeeper$packets_sent
+packets_recv<-zookeeper$packets_recv
+errin<-zookeeper$errin
+errout<-zookeeper$errout
+dropout<-zookeeper$dropout
+read_count<-zookeeper$read_count
+write_count<-zookeeper$write_count
+read_bytes<-zookeeper$read_bytes
+write_bytes<-zookeeper$write_bytes
+cpu_percent<-zookeeper$cpu_percent
+num_fds<-zookeeper$num_fds
+num_ctx_switchesVoluntary<-zookeeper$num_ctx_switchesVoluntary
+num_ctx_switchesInvoluntary<-zookeeper$num_ctx_switchesInvoluntary
+
+df <-data.frame(memory_percent,rss,vms,bytes_sent,bytes_recv,packets_sent,bytes_recv,packets_sent,packets_recv,errin,dropout,read_count,write_count,read_bytes,write_bytes,cpu_percent,num_fds,num_ctx_switchesVoluntary,num_ctx_switchesInvoluntary)
+library(sqldf)
+write.csv(sqldf('SELECT DISTINCT * FROM df'),file="zookeeperSinRep") 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 write(x, file = "data",
       ncolumns = if(is.character(x)) 1 else 5,
       append = FALSE, sep = " ")

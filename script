@@ -51,6 +51,32 @@ write.csv(sqldf('SELECT DISTINCT * FROM df'),file="zookeeperSinRep")
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ELimina duplicados de archivo supervisor_pacemaker.cvs
+
+memory_percent<-supervisor_pacemaker$memory_percent
+rss<-supervisor_pacemaker$rss
+vms<-supervisor_pacemaker$vms
+bytes_sent<-supervisor_pacemaker$bytes_sent
+bytes_recv<-supervisor_pacemaker$bytes_recv
+packets_sent<-supervisor_pacemaker$packets_sent
+packets_recv<-supervisor_pacemaker$packets_recv
+errin<-supervisor_pacemaker$errin
+errout<-supervisor_pacemaker$errout
+dropout<-supervisor_pacemaker$dropout
+read_count<-supervisor_pacemaker$read_count
+write_count<-supervisor_pacemaker$write_count
+read_bytes<-supervisor_pacemaker$read_bytes
+write_bytes<-supervisor_pacemaker$write_bytes
+cpu_percent<-supervisor_pacemaker$cpu_percent
+num_fds<-supervisor_pacemaker$num_fds
+num_ctx_switchesVoluntary<-supervisor_pacemaker$num_ctx_switchesVoluntary
+num_ctx_switchesInvoluntary<-supervisor_pacemaker$num_ctx_switchesInvoluntary
+
+df <-data.frame(memory_percent,rss,vms,bytes_sent,bytes_recv,packets_sent,bytes_recv,packets_sent,packets_recv,errin,dropout,read_count,write_count,read_bytes,write_bytes,cpu_percent,num_fds,num_ctx_switchesVoluntary,num_ctx_switchesInvoluntary)
+library(sqldf)
+write.csv(sqldf('SELECT DISTINCT * FROM df'),file="supervisorSinRep") 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 write(x, file = "data",
       ncolumns = if(is.character(x)) 1 else 5,
       append = FALSE, sep = " ")

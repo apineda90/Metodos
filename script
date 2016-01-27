@@ -1,4 +1,4 @@
-//ELimina duplicados de archivo nimbus.cvs
+//ELimina duplicados de archivo nimbus.csv
 
 memory_percent<-nimbus$memory_percent
 rss<-nimbus$rss
